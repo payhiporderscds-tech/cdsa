@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thank You — CDS</title>
+  <title>Consumer Dispute Assistance Service — Client Portal</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
   <style>
-    body, html { font-family: 'Merriweather', serif; text-align:center; }
+    body, html { font-family: 'Merriweather', serif; }
     .logo-text{display:flex;flex-direction:column;line-height:1;}
     .logo-text .main{font-weight:800;font-size:22px;}
     .logo-text .sub{font-family:'Alex Brush',cursive;font-size:14px;margin-top:-2px;white-space:nowrap;}
     .nav-links{display:flex;gap:10px;}
     .nav-links a{background:var(--brand-1);color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;transition:background .3s;}
     .nav-links a:hover{background:var(--brand-cta);}
-    .thankyou{padding:80px 20px;}
-    .thankyou h1{font-size:32px;margin-bottom:20px;}
-    .thankyou p{max-width:700px;margin:0 auto 20px; line-height:1.6;}
-    .thankyou a.btn{background:var(--brand-cta);padding:12px 22px;font-size:16px;}
+    .start-cols{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+    .start-cols .card{flex:0 1 320px;}
   </style>
 </head>
 <body>
@@ -32,6 +30,7 @@
       </a>
       <div class="nav-links">
         <a href="#" onclick="document.getElementById('contactModal').style.display='flex'">Contact</a>
+        <a href="#upload">Upload Response</a>
       </div>
     </div>
   </nav>
@@ -46,21 +45,101 @@
     </div>
   </div>
 
-  <!-- THANK YOU SECTION -->
-  <section class="thankyou">
-    <h1>✅ Thank You for Your Purchase!</h1>
-    <p><strong>Your dispute package is now being prepared.</strong></p>
-    <p>Please allow the following timeframe for audit and drafting of your letters, depending on the plan you selected:</p>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <h1>Take Control of Your Credit Disputes</h1>
+      <p>Upload your credit report, receive a forensic audit of errors and inaccuracies, and get personalized dispute letters. Every letter is reviewed and approved before mailing or download.</p>
+      <div class="hero-cta">
+        <a class="btn" href="intake.html">Start Audit & Upload</a>
+        <a class="btn secondary" href="consultation.html">Book a Consultation</a>
+      </div>
+    </div>
+  </header>
 
-    <p><strong>DIY Plan:</strong> Drafted letters will be available for download within <strong>1 hour</strong> of submission.</p>
-    <p><strong>Premium Plan:</strong> Letters will be drafted and mailed on your behalf within <strong>3–5 business days</strong>.</p>
-    <p><strong>Full Service Plan:</strong> Comprehensive document preparation, mailing, and <strong>evidence preparation</strong> will begin immediately, with updates provided throughout your <strong>90-day program</strong>.</p>
+  <!-- START HERE -->
+  <section id="start">
+    <div class="container">
+      <h2 class="section-title">Start Here</h2>
+      <p class="muted">Complete intake and choose your plan.</p>
+      <div class="start-cols">
+        <div class="card">
+          <h3>1) Intake Form</h3>
+          <p>Enter your info and upload your credit report (PDF).</p>
+          <a class="btn" href="intake.html">Open Intake Form</a>
+        </div>
+        <div class="card">
+          <h3>2) Payment</h3>
+          <p>Choose DIY, Premium, Full Service, or eBooks.</p>
+          <a class="btn" href="payment.html">View Plans</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <p>📩 You will receive an <strong>email notification</strong> once your dispute letters or package is complete and ready for your review or delivery.</p>
+  <!-- PLANS & PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Plans & Pricing</h2>
+      <div class="pricing">
+        <div class="card plan">
+          <h3>DIY</h3>
+          <p class="muted">Audit + Draft (You Mail)</p>
+          <div class="price">$79 / bureau</div>
+          <a class="btn" href="https://payhip.com/b/Hpvm2" target="_blank">Purchase DIY</a>
+        </div>
+        <div class="card plan">
+          <h3>Premium</h3>
+          <p class="muted">Audit + Draft + Mailing</p>
+          <div class="price">$49.99 / letter</div>
+          <a class="btn" href="https://payhip.com/b/38Jd5" target="_blank">Purchase Premium</a>
+        </div>
+        <div class="card plan">
+          <h3>Full Service</h3>
+          <p class="muted">Complete 90-Day Program</p>
+          <div class="price">$299 / month</div>
+          <a class="btn" href="https://payhip.com/b/u54bO" target="_blank">Subscribe Full Service</a>
+        </div>
+        <div class="card plan">
+          <h3>eBooks & Resources</h3>
+          <p class="muted">Instant digital downloads</p>
+          <a class="btn" href="https://payhip.com/CAIDConsumerAdvocacyInformationDocuments" target="_blank">Open Store</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <p>🔄 When you receive responses from the credit bureaus or furnishers, please return to our portal and <strong>upload them using the “Upload Response” section</strong>, so we can prepare the next round of dispute letters without delay.</p>
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <details>
+        <summary>Are you a credit repair company?</summary>
+        <p>No. We provide document preparation and guidance so you can run your own disputes.</p>
+      </details>
+      <details>
+        <summary>How many letters in Round 1?</summary>
+        <p>Most clients have 4–10 letters in Round 1 across bureaus and furnishers.</p>
+      </details>
+      <details>
+        <summary>Can I review letters before download?</summary>
+        <p>Yes. Every letter is available for preview. Nothing is mailed without your approval.</p>
+      </details>
+    </div>
+  </section>
 
-    <a href="https://cdsa-chi.vercel.app/#upload" class="btn">Upload Your Response</a>
+  <!-- UPLOAD RESPONSE -->
+  <section id="upload">
+    <div class="container">
+      <h2 class="section-title">Upload Your Response</h2>
+      <p class="muted">Once you receive a response from the credit bureaus or furnishers, upload it here so we can prepare the next round of dispute letters.</p>
+      <div class="card">
+        <iframe class="frame" 
+          src="https://form.jotform.com/252575508801055"
+          style="width:100%; height:600px; border:0; border-radius:12px;">
+        </iframe>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
