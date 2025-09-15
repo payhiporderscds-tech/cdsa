@@ -27,10 +27,20 @@
         </span>
       </a>
       <div class="nav-links">
-        <a href="mailto:disputeassistant@gmail.com?subject=Support%20Request">Contact: disputeassistant@gmail.com | (346) 342-2447</a>
+        <a href="#" onclick="document.getElementById('contactModal').style.display='flex'">Contact</a>
       </div>
     </div>
   </nav>
+
+  <!-- CONTACT MODAL -->
+  <div id="contactModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.6); align-items:center; justify-content:center; z-index:1000;">
+    <div style="background:#fff; padding:20px; border-radius:12px; text-align:center; max-width:300px;">
+      <h3>Contact Us</h3>
+      <p>Email: <a href="mailto:disputeassistant@gmail.com">disputeassistant@gmail.com</a></p>
+      <p>Phone: <a href="tel:13463422447">(346) 342-2447</a></p>
+      <button onclick="document.getElementById('contactModal').style.display='none'" style="margin-top:10px; padding:8px 16px; border:none; background:var(--brand-1); color:#fff; border-radius:8px; cursor:pointer;">Close</button>
+    </div>
+  </div>
 
   <!-- HERO -->
   <header class="hero">
@@ -90,7 +100,6 @@
         <div class="card plan">
           <h3>eBooks & Resources</h3>
           <p class="muted">Instant digital downloads</p>
-          <div class="price">Varies</div>
           <a class="btn" href="https://payhip.com/CAIDConsumerAdvocacyInformationDocuments" target="_blank">Open Store</a>
         </div>
       </div>
@@ -120,8 +129,10 @@
   <footer>
     <div class="container">
       <div class="links">
+        <a href="consultation.html">Consultation</a>
+        <a href="payment.html">Plans</a>
+        <a href="terms.html" target="_blank">Terms of Service</a>
         <a href="mailto:disputeassistant@gmail.com">Email Support</a>
-        <a href="tel:13463422447">(346) 342-2447</a>
       </div>
       <p>© <span id="y"></span> Consumer Dispute Assistance</p>
     </div>
