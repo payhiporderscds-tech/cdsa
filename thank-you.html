@@ -7,17 +7,18 @@
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
   <style>
-    body, html { font-family: 'Merriweather', serif; text-align:center; }
+    body, html { font-family: 'Merriweather', serif; }
     .logo-text{display:flex;flex-direction:column;line-height:1;}
     .logo-text .main{font-weight:800;font-size:22px;}
     .logo-text .sub{font-family:'Alex Brush',cursive;font-size:14px;margin-top:-2px;white-space:nowrap;}
     .nav-links{display:flex;gap:10px;}
     .nav-links a{background:var(--brand-1);color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;transition:background .3s;}
     .nav-links a:hover{background:var(--brand-cta);}
-    .thankyou{padding:80px 20px;}
-    .thankyou h1{font-size:32px;margin-bottom:20px;}
-    .thankyou p{max-width:700px;margin:0 auto 20px; line-height:1.6;}
-    .thankyou a.btn{background:var(--brand-cta);padding:12px 22px;font-size:16px;}
+    .thankyou{padding:80px 20px; max-width:800px; margin:0 auto;}
+    .thankyou h1{text-align:center;font-size:32px;margin-bottom:20px;}
+    .thankyou p{text-align:justify; margin-bottom:20px; line-height:1.6;}
+    .thankyou a.btn{display:inline-block; margin-top:20px; background:var(--brand-cta);padding:12px 22px;font-size:16px; text-decoration:none; color:#fff; border-radius:8px;}
+    .thankyou .btn-container{text-align:center;}
   </style>
 </head>
 <body>
@@ -60,7 +61,9 @@
 
     <p>🔄 When you receive responses from the credit bureaus or furnishers, please return to our portal and <strong>upload them using the “Upload Response” button</strong>, so we can prepare the next round of dispute letters without delay.</p>
 
-    <a href="https://cdsa-chi.vercel.app/#upload" class="btn">Upload Your Response</a>
+    <div class="btn-container">
+      <a href="https://cdsa-chi.vercel.app/#upload" class="btn">Upload Your Response</a>
+    </div>
   </section>
 
   <!-- FOOTER -->
