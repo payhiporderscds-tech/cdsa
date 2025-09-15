@@ -5,15 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Consumer Dispute Assistance Service — Client Portal</title>
   <link rel="stylesheet" href="styles.css" />
+  <!-- Load Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      font-family: 'Merriweather', serif;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .logo-text .main {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0.5px;
+    }
+    .logo-text .sub {
+      font-family: 'Alex Brush', cursive;
+      font-size: 18px;
+      margin-top: -2px;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 <body>
   <!-- NAV -->
   <nav class="nav">
     <div class="container nav-inner">
       <a class="logo" href="index.html">
-  <span style="font-weight:800; font-size:20px; letter-spacing:0.5px;">CDS</span>
-</a>
-
+        <span class="logo-text">
+          <span class="main">CDS</span>
+          <span class="sub">Consumer Dispute Assistance</span>
+        </span>
+      </a>
       <div class="nav-links">
         <a href="intake.html">Start</a>
         <a href="payment.html">Plans</a>
@@ -141,4 +166,3 @@
   </footer>
 </body>
 </html>
-
