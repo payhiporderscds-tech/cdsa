@@ -3,44 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Dispute Letters — CDS AS</title>
+  <title>Consumer Dispute Assistance Service — Client Portal</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- NAV -->
   <nav class="nav">
     <div class="container nav-inner">
       <a class="logo" href="index.html">
-        <img src="assets/logo.png" alt="CDS AS"/><span>CDS AS</span>
+        <img src="assets/logo.png" alt="CDS AS"/>
+        <span>CDS AS</span>
       </a>
       <div class="nav-links">
-        <a href="index.html#start">Start</a>
-        <a href="index.html#pricing">Plans</a>
+        <a href="intake.html">Start</a>
+        <a href="payment.html">Plans</a>
+        <a href="letters.html">Letters</a>
         <a href="consultation.html">Consultation</a>
         <a href="terms.html" target="_blank">Terms</a>
+        <a class="cta" href="mailto:disputeassistant@gmail.com">Contact</a>
       </div>
     </div>
   </nav>
 
-  <header class="subhero"><div class="container"><h1>Your Dispute Letters</h1></div></header>
-
-  <section>
+  <!-- HERO -->
+  <header class="hero">
     <div class="container">
-      <div class="card">
-        <iframe class="frame"
-          src="https://payhip.com/b/Hpvm2">
-        </iframe>
+      <h1>Take Control of Your Credit Disputes</h1>
+      <p>Upload your credit report, receive a forensic audit of errors and inaccuracies, and get personalized dispute letters. Every letter is reviewed and approved before mailing or download.</p>
+      <div class="hero-cta">
+        <a class="btn" href="intake.html">Start Audit & Upload</a>
+        <a class="btn secondary" href="consultation.html">Book a Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- START HERE -->
+  <section id="start">
+    <div class="container">
+      <h2 class="section-title">Start Here</h2>
+      <p class="muted">Complete intake, choose your plan, and access your letters.</p>
+      <div class="cols">
+        <div class="card">
+          <h3>1) Intake Form</h3>
+          <p>Enter your info and upload your credit report (PDF).</p>
+          <a class="btn" href="intake.html">Open Intake Form</a>
+        </div>
+        <div class="card">
+          <h3>2) Payment</h3>
+          <p>Choose DIY, Premium, or Full Service.</p>
+          <a class="btn" href="payment.html">View Plans</a>
+        </div>
+        <div class="card">
+          <h3>3) Letters</h3>
+          <p>After intake & payment, access and review your dispute letters.</p>
+          <a class="btn" href="letters.html">Access Letters</a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- PLANS & PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Plans & Pricing</h2>
+      <div class="pricing">
+        <div class="card plan">
+          <h3>DIY</h3>
+          <p class="muted">Audit + Draft (You Mail)</p>
+          <div class="price">$79 / bureau</div>
+          <ul class="list">
+            <li>Upload your credit report</li>
+            <li>Audit & dispute letters prepared</li>
+            <li>You handle your own mailing</li>
+          </ul>
+          <a class="btn" href="https://payhip.com/b/Hpvm2" target="_blank" rel="noopener">Purchase DIY</a>
+        </div>
+
+        <div class="card plan">
+          <h3>Premium</h3>
+          <p class="muted">Audit + Draft + Mailing</p>
+          <div class="price">$49.99 / letter</div>
+          <ul class="list">
+            <li>Audit & drafted dispute letters</li>
+            <li>Mailed for you (Certified Mail)</li>
+            <li>Round 2 included after responses</li>
+          </ul>
+          <a class="btn" href="https://payhip.com/b/38Jd5" target="_blank" rel="noopener">Purchase Premium</a>
+        </div>
+
+        <div class="card plan">
+          <h3>Full Service</h3>
+          <p class="muted">Complete 90-Day Program</p>
+          <div class="price">$299 / month</div>
+          <ul class="list">
+            <li>Audit, draft & mailing of all letters</li>
+            <li>Evidence package for lawsuits</li>
+            <li>Attorney referral if needed</li>
+          </ul>
+          <a class="btn" href="https://payhip.com/b/u54bO" target="_blank" rel="noopener">Subscribe Full Service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <details>
+        <summary>Are you a credit repair company?</summary>
+        <p>No. We provide document preparation and guidance so you can run your own disputes.</p>
+      </details>
+      <details>
+        <summary>How many letters in Round 1?</summary>
+        <p>Most clients have 4–10 letters in Round 1 across bureaus and furnishers.</p>
+      </details>
+      <details>
+        <summary>Can I review letters before download?</summary>
+        <p>Yes. Every letter is available for preview. Nothing is mailed without your approval.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="links">
-        <a href="index.html">Home</a>
-        <a href="terms.html" target="_blank">Terms</a>
+        <a href="consultation.html">Consultation</a>
+        <a href="payment.html">Plans</a>
+        <a href="letters.html">Letters</a>
+        <a href="terms.html" target="_blank">Terms of Service</a>
         <a href="mailto:disputeassistant@gmail.com">Email Support</a>
       </div>
-      <p>© <span id="y"></span> CDS AS</p>
+      <p>© <span id="y"></span> Consumer Dispute Assistance Service</p>
     </div>
     <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   </footer>
