@@ -3,17 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout — CDS AS</title>
+  <title>Checkout — CDS</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    body, html { font-family: 'Merriweather', serif; }
+  </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="logo" href="index.html">
-        <img src="assets/logo.png" alt="CDS AS"/><span>CDS AS</span>
+      <a class="logo" href="index.html" style="display:flex; flex-direction:column; line-height:1;">
+        <span style="font-weight:800; font-size:22px; font-family:'Merriweather', serif;">CDS</span>
+        <span style="font-family:'Alex Brush', cursive; font-size:18px; margin-top:-2px;">Consumer Dispute Assistance</span>
       </a>
       <div class="nav-links">
-        <a href="index.html#pricing">Plans</a>
+        <a href="intake.html">Start</a>
+        <a href="payment.html">Plans</a>
         <a href="letters.html">Letters</a>
         <a href="consultation.html">Consultation</a>
         <a href="terms.html" target="_blank">Terms</a>
@@ -50,7 +56,7 @@
       <div class="card">
         <h3>eBooks & Resources</h3>
         <p>Instant downloads after purchase.</p>
-        <a class="btn" href="payhip.com/CAIDConsumerAdvocacyInformationDocuments" target="_blank">Open Store</a>
+        <a class="btn" href="https://payhip.com/CAIDConsumerAdvocacyInformationDocuments" target="_blank">Open Store</a>
       </div>
     </div>
   </section>
@@ -62,7 +68,7 @@
         <a href="terms.html" target="_blank">Terms</a>
         <a href="mailto:disputeassistant@gmail.com">Email Support</a>
       </div>
-      <p>© <span id="y"></span> CDS AS</p>
+      <p>© <span id="y"></span> Consumer Dispute Assistance</p>
     </div>
     <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   </footer>
