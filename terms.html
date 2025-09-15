@@ -8,15 +8,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
   <style>
     body, html { font-family: 'Merriweather', serif; }
+    .logo-text{display:flex;flex-direction:column;line-height:1;}
+    .logo-text .main{font-weight:800;font-size:22px;}
+    .logo-text .sub{font-family:'Alex Brush',cursive;font-size:14px;margin-top:-2px;white-space:nowrap;}
+    .nav-links{display:flex;gap:10px;}
+    .nav-links a{background:var(--brand-1);color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;transition:background .3s;}
+    .nav-links a:hover{background:var(--brand-cta);}
   </style>
   <meta name="robots" content="noindex">
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="logo" href="index.html" style="display:flex; flex-direction:column; line-height:1;">
-        <span style="font-weight:800; font-size:22px; font-family:'Merriweather', serif;">CDS</span>
-        <span style="font-family:'Alex Brush', cursive; font-size:18px; margin-top:-2px;">Consumer Dispute Assistance</span>
+      <a class="logo" href="index.html">
+        <span class="logo-text">
+          <span class="main">CDS</span>
+          <span class="sub">Consumer Dispute Assistance</span>
+        </span>
       </a>
       <div class="nav-links">
         <a href="intake.html">Start</a>
