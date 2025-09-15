@@ -5,28 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Consumer Dispute Assistance Service — Client Portal</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Load Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
   <style>
-    body, html {
-      font-family: 'Merriweather', serif;
-    }
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .logo-text .main {
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: 0.5px;
-    }
-    .logo-text .sub {
-      font-family: 'Alex Brush', cursive;
-      font-size: 18px;
-      margin-top: -2px;
-      white-space: nowrap;
-    }
+    body, html { font-family: 'Merriweather', serif; }
+    .logo-text{display:flex;flex-direction:column;line-height:1;}
+    .logo-text .main{font-weight:800;font-size:22px;}
+    .logo-text .sub{font-family:'Alex Brush',cursive;font-size:14px;margin-top:-2px;white-space:nowrap;}
+    .nav-links{display:flex;gap:10px;}
+    .nav-links a{background:var(--brand-1);color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;transition:background .3s;}
+    .nav-links a:hover{background:var(--brand-cta);}
   </style>
 </head>
 <body>
@@ -45,7 +32,7 @@
         <a href="letters.html">Letters</a>
         <a href="consultation.html">Consultation</a>
         <a href="terms.html" target="_blank">Terms</a>
-        <a class="cta" href="mailto:disputeassistant@gmail.com">Contact</a>
+        <a href="mailto:disputeassistant@gmail.com">Contact</a>
       </div>
     </div>
   </nav>
@@ -103,7 +90,6 @@
           </ul>
           <a class="btn" href="https://payhip.com/b/Hpvm2" target="_blank" rel="noopener">Purchase DIY</a>
         </div>
-
         <div class="card plan">
           <h3>Premium</h3>
           <p class="muted">Audit + Draft + Mailing</p>
@@ -115,7 +101,6 @@
           </ul>
           <a class="btn" href="https://payhip.com/b/38Jd5" target="_blank" rel="noopener">Purchase Premium</a>
         </div>
-
         <div class="card plan">
           <h3>Full Service</h3>
           <p class="muted">Complete 90-Day Program</p>
@@ -160,7 +145,7 @@
         <a href="terms.html" target="_blank">Terms of Service</a>
         <a href="mailto:disputeassistant@gmail.com">Email Support</a>
       </div>
-      <p>© <span id="y"></span> Consumer Dispute Assistance Service</p>
+      <p>© <span id="y"></span> Consumer Dispute Assistance</p>
     </div>
     <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
   </footer>
