@@ -15,7 +15,10 @@
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-white/20 grid place-items-center font-bold">CDS</div>
-        <div><h1 class="text-xl font-semibold">Consumer Dispute Services</h1><p class="text-xs opacity-90">NPI Method</p></div>
+        <div>
+          <h1 class="text-xl font-semibold">Consumer Dispute Services</h1>
+          <p class="text-xs opacity-90">NPI Method</p>
+        </div>
       </div>
       <nav class="hidden md:flex gap-4 text-sm">
         <a href="index.html">Home</a>
@@ -36,8 +39,10 @@
   <dialog id="authDialog" class="p-0 rounded-xl w-[95%] max-w-md">
     <form method="dialog" class="card p-6 bg-white">
       <h3 class="text-xl font-bold">Log in / Create account</h3>
-      <label>Email</label><input id="authEmail" type="email" class="w-full border rounded-md p-2 mt-1" required />
-      <label>Password</label><input id="authPassword" type="password" class="w-full border rounded-md p-2 mt-1" required />
+      <label>Email</label>
+      <input id="authEmail" type="email" class="w-full border rounded-md p-2 mt-1" required />
+      <label>Password</label>
+      <input id="authPassword" type="password" class="w-full border rounded-md p-2 mt-1" required />
       <div class="mt-4 flex gap-2">
         <button id="loginBtn" type="button" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Log in</button>
         <button id="signupBtn" type="button" class="px-4 py-2 bg-slate-800 text-white rounded-md">Create account</button>
@@ -69,13 +74,20 @@
           <option value="cra">Round 1 – CRA</option>
           <option value="cra2">Round 2 – CRA</option>
         </select>
-        <label>Your Name</label><input id="yourName" class="w-full border rounded p-2 mt-1" />
-        <label>Your Address</label><textarea id="yourAddr" class="w-full border rounded p-2 mt-1"></textarea>
-        <label>Date</label><input id="letterDate" type="date" class="w-full border rounded p-2 mt-1" />
-        <label>Recipient Name</label><input id="recipName" class="w-full border rounded p-2 mt-1" />
-        <label>Recipient Address</label><textarea id="recipAddr" class="w-full border rounded p-2 mt-1"></textarea>
-        <label>Account / File Info</label><input id="acctInfo" class="w-full border rounded p-2 mt-1" />
-        <label>Notes</label><textarea id="notes" class="w-full border rounded p-2 mt-1"></textarea>
+        <label>Your Name</label>
+        <input id="yourName" class="w-full border rounded p-2 mt-1" />
+        <label>Your Address</label>
+        <textarea id="yourAddr" class="w-full border rounded p-2 mt-1"></textarea>
+        <label>Date</label>
+        <input id="letterDate" type="date" class="w-full border rounded p-2 mt-1" />
+        <label>Recipient Name</label>
+        <input id="recipName" class="w-full border rounded p-2 mt-1" />
+        <label>Recipient Address</label>
+        <textarea id="recipAddr" class="w-full border rounded p-2 mt-1"></textarea>
+        <label>Account / File Info</label>
+        <input id="acctInfo" class="w-full border rounded p-2 mt-1" />
+        <label>Notes</label>
+        <textarea id="notes" class="w-full border rounded p-2 mt-1"></textarea>
 
         <div class="mt-4 flex gap-2">
           <button onclick="generateLetter()" id="generateBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Generate</button>
@@ -131,6 +143,136 @@
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
-  <!-- Page-specific letter generator logic will go here (same as we built earlier) -->
+  <!-- Page-specific Letter Generator Logic -->
+  <script>
+    // ===== Templates =====
+    const TEMPLATES = {
+      collection: `I am disputing the validity of the collection account reported under [Account Info].
+Under the Fair Debt Collection Practices Act, I request validation of this debt.
+Please provide proper documentation that establishes your legal authority to collect.`,
+
+      chargeoff: `I am disputing the charge-off reported under [Account Info].
+Please provide documentation establishing accuracy, including signed agreements, payment history, and charge-off accounting.`,
+
+      cra: `This letter serves as a formal dispute under the Fair Credit Reporting Act.
+I dispute the accuracy of the information reported under [Account Info].
+Please reinvestigate and delete unverifiable information as required by 15 U.S.C. §1681i.`,
+
+      cra2: `I previously disputed the account [Account Info], and you verified it without providing verifiable evidence.
+Under the FCRA, you are required to provide the method of verification and the name of the furnisher.
+Failure to comply will result in further action.`
+    };
+
+    async function extractTextFromFile(file) {
+      if (!file) return "";
+      if (file.type === "application/pdf") {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let text = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          text += content.items.map(it => it.str).join(" ") + "\n";
+        }
+        return text;
+      }
+      return await file.text();
+    }
+
+    function autoDetectTypeFromText(text) {
+      const scores = { collection: 0, chargeoff: 0, cra: 0, cra2: 0 };
+      if (/charge[- ]?off/i.test(text)) scores.chargeoff += 2;
+      if (/\bcollection(s|)?\b/i.test(text) || /collection agency/i.test(text)) scores.collection += 2;
+      if (/experian|equifax|transunion/i.test(text)) scores.cra += 1;
+      if (/verified|previously investigated|frivolous/i.test(text)) scores.cra2 += 2;
+      const choice = Object.entries(scores).sort((a, b) => b[1] - a[1])[0];
+      return choice[1] > 0 ? choice[0] : "";
+    }
+
+    document.getElementById("creditReport").addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const text = await extractTextFromFile(file);
+      const type = autoDetectTypeFromText(text);
+      const sel = document.getElementById("letterType");
+      if (type) {
+        sel.value = type;
+        alert(`System detected: ${type.toUpperCase()} letter`);
+      } else {
+        alert("No clear match found. Please choose a letter type manually.");
+      }
+    });
+
+    async function autoDetectRound2() {
+      const file = document.getElementById("responseUpload").files[0];
+      if (!file) { alert("Upload a response letter first."); return; }
+      const text = await extractTextFromFile(file);
+      if (/verified|previously investigated|frivolous/i.test(text)) {
+        document.getElementById("letterType").value = "cra2";
+        alert("Detected CRA Round 2 scenario. Selected: CRA2");
+      } else {
+        alert("Could not detect Round 2 keywords. You can still pick CRA2 manually if appropriate.");
+      }
+    }
+    window.autoDetectRound2 = autoDetectRound2;
+
+    function generateLetter() {
+      const type = document.getElementById("letterType").value;
+      if (!type) { alert("Please select a letter type."); return; }
+
+      const name = document.getElementById("yourName").value || "[Your Name]";
+      const addr = document.getElementById("yourAddr").value || "[Your Address]\nCity, ST ZIP";
+      const date = document.getElementById("letterDate").value || new Date().toISOString().slice(0,10);
+      const recipName = document.getElementById("recipName").value || "[Recipient Name]";
+      const recipAddr = document.getElementById("recipAddr").value || "[Recipient Address]";
+      const acctInfo = document.getElementById("acctInfo").value || "[Account / File Info]";
+      const notes = document.getElementById("notes").value || "";
+
+      const header = `${name}\n${addr}\n\n${date}\n\n${recipName}\n${recipAddr}\n`;
+      const body = (TEMPLATES[type] || "").replace("[Account Info]", acctInfo) + (notes ? `\n\nNotes: ${notes}` : "");
+      const letter = `${header}\n${body}\n\nSincerely,\n${name}\n— Generated by Consumer Dispute Services (NPI Method)`;
+
+      document.getElementById("output").value = letter;
+
+      const d1 = document.getElementById("docBtn");
+      const d2 = document.getElementById("pdfBtn");
+      d1.disabled = false; d1.classList.remove("bg-gray-400"); d1.classList.add("bg-indigo-600","hover:bg-indigo-700");
+      d2.disabled = false; d2.classList.remove("bg-gray-400"); d2.classList.add("bg-indigo-600","hover:bg-indigo-700");
+    }
+    window.generateLetter = generateLetter;
+
+    function copyLetter() {
+      const ta = document.getElementById("output");
+      ta.select();
+      document.execCommand("copy");
+      alert("Letter copied to clipboard");
+    }
+    window.copyLetter = copyLetter;
+
+    function downloadDoc() {
+      const content = document.getElementById("output").value || "";
+      const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre style="font-family:Georgia,serif;white-space:pre-wrap">${content.replace(/</g,"&lt;")}</pre></body></html>`;
+      const blob = new Blob([html], {type:"application/msword"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "dispute_letter.doc"; a.click();
+      URL.revokeObjectURL(url);
+    }
+    window.downloadDoc = downloadDoc;
+
+    function downloadPDF() {
+      const content = document.getElementById("output").value || "";
+      const docDef = {
+        content: [
+          { text: "Dispute Letter", style: "header" },
+          { text: content, margin: [0,10,0,0] }
+        ],
+        styles: { header: { fontSize: 16, bold: true } },
+        defaultStyle: { fontSize: 11 }
+      };
+      pdfMake.createPdf(docDef).download("dispute_letter.pdf");
+    }
+    window.downloadPDF = downloadPDF;
+  </script>
 </body>
 </html>
