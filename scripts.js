@@ -1,4 +1,4 @@
-// scripts.js  (shared: Firebase Auth + eBooks + Auth UI helpers)
+// scripts.js (shared Firebase Auth + eBooks + Auth UI helpers)
 
 // ===== Firebase (CDS) =====
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
@@ -10,17 +10,18 @@ import {
   createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-// ✅ Corrected Firebase config
+// ✅ Correct Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCIFLzjNsgWusGBOOdVdZlkUWk_j8YdJws",
   authDomain: "cds-dispute-system.firebaseapp.com",
   projectId: "cds-dispute-system",
-  storageBucket: "cds-dispute-system.appspot.com",   // ✅ fixed here
+  storageBucket: "cds-dispute-system.appspot.com",   // fixed here
   messagingSenderId: "1086342153390",
   appId: "1:1086342153390:web:c8f65869313c838280993f",
   measurementId: "G-WGTD60DXSS",
 };
 
+// Init Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
@@ -72,15 +73,16 @@ export function setupAuthUI() {
   const $ = (id) => document.getElementById(id);
   const dialog = $("authDialog");
 
+  // Open auth modal
   if ($("loginOpenBtn")) $("loginOpenBtn").onclick = () => dialog?.showModal();
-  if ($("authInlineBtn1")) $("authInlineBtn1").onclick = () => dialog?.showModal();
-  if ($("authInlineBtn2")) $("authInlineBtn2").onclick = () => dialog?.showModal();
 
+  // Logout
   if ($("logoutBtn"))
     $("logoutBtn").onclick = async () => {
       await signOut(auth);
     };
 
+  // Login
   if ($("loginBtn"))
     $("loginBtn").onclick = async () => {
       $("authStatus").textContent = "Logging in...";
@@ -93,6 +95,7 @@ export function setupAuthUI() {
       }
     };
 
+  // Signup
   if ($("signupBtn"))
     $("signupBtn").onclick = async () => {
       $("authStatus").textContent = "Creating account...";
@@ -105,16 +108,20 @@ export function setupAuthUI() {
       }
     };
 
-  // Auth state → toggle UI
+  // Gate sections on login state
   onAuthStateChanged(auth, (user) => {
     const loggedIn = !!user;
+
+    // header buttons
     if ($("logoutBtn")) $("logoutBtn").classList.toggle("hidden", !loggedIn);
     if ($("loginOpenBtn")) $("loginOpenBtn").classList.toggle("hidden", loggedIn);
 
-    if ($("intakeLocked")) $("intakeLocked").classList.toggle("hidden", loggedIn ? true : false);
+    // Intake page gate
+    if ($("intakeLocked")) $("intakeLocked").classList.toggle("hidden", loggedIn);
     if ($("intakeEmbed")) $("intakeEmbed").classList.toggle("hidden", !loggedIn);
 
-    if ($("lettersLocked")) $("lettersLocked").classList.toggle("hidden", loggedIn ? true : false);
+    // Letters page gate
+    if ($("lettersLocked")) $("lettersLocked").classList.toggle("hidden", loggedIn);
     if ($("lettersWrap")) $("lettersWrap").classList.toggle("hidden", !loggedIn);
   });
 }
