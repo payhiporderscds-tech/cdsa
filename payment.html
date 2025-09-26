@@ -1,99 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CDS – Payment</title>
-  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800">
   <!-- Header -->
-  <header class="brand-gradient text-white sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-white/20 grid place-items-center font-bold">CDS</div>
-        <div>
-          <h1 class="text-xl font-semibold">Consumer Dispute Services</h1>
-          <p class="text-xs opacity-90">NPI Method</p>
-        </div>
-      </div>
-      <nav class="hidden md:flex gap-4 text-sm">
-        <a href="index.html">Home</a>
-        <a href="intake.html">Client Intake</a>
-        <a href="letters.html">Letters</a>
-        <a href="consultation.html">Consultation</a>
-        <a href="payment.html" class="underline">Payment</a>
-        <a href="terms.html">Terms</a>
-      </nav>
-      <div class="flex items-center gap-2">
-        <button id="loginOpenBtn" class="px-3 py-1.5 rounded-md bg-white text-slate-800 text-sm">Log in</button>
-        <button id="logoutBtn" class="px-3 py-1.5 rounded-md bg-black/30 text-white text-sm hidden">Log out</button>
-      </div>
-    </div>
+  <header class="bg-indigo-700 text-white px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Consumer Dispute Services</h1>
+    <nav>
+      <a href="index.html" class="mr-4">Home</a>
+      <a href="intake.html" class="mr-4">Intake</a>
+      <a href="letters.html" class="mr-4">Letters</a>
+      <a href="consultation.html" class="mr-4">Consultation</a>
+      <a href="payment.html" class="mr-4">Payment</a>
+      <a href="terms.html" class="mr-4">Terms</a>
+      <button id="loginOpenBtn" class="bg-yellow-400 px-3 py-1 rounded">Login</button>
+      <button id="logoutBtn" class="hidden bg-red-500 px-3 py-1 rounded">Logout</button>
+    </nav>
   </header>
 
-  <!-- Auth Modal -->
-  <dialog id="authDialog" class="p-0 rounded-xl w-[95%] max-w-md">
-    <form method="dialog" class="card p-6 bg-white">
-      <h3 class="text-xl font-bold">Log in / Create account</h3>
-      <label>Email</label>
-      <input id="authEmail" type="email" class="w-full border rounded-md p-2 mt-1" required />
-      <label>Password</label>
-      <input id="authPassword" type="password" class="w-full border rounded-md p-2 mt-1" required />
-      <div class="mt-4 flex gap-2">
-        <button id="loginBtn" type="button" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Log in</button>
-        <button id="signupBtn" type="button" class="px-4 py-2 bg-slate-800 text-white rounded-md">Create account</button>
-        <button type="submit" class="ml-auto px-4 py-2 border rounded-md">Close</button>
-      </div>
-      <div id="authStatus" class="text-sm mt-2 text-slate-600"></div>
-    </form>
-  </dialog>
+  <!-- Main -->
+  <section class="py-12 px-6 text-center">
+    <h2 class="text-2xl font-bold mb-4">Payment Options</h2>
+    <p class="mb-6">Choose your preferred service below:</p>
 
-  <!-- Payment Section -->
-  <section class="max-w-5xl mx-auto px-4 py-12 text-center">
-    <h2 class="text-2xl font-bold">Payment Options</h2>
-    <p class="mt-3 text-slate-700">
-      Secure payments are processed through our PayHip store using Stripe.  
-      Choose the option that best fits your needs.
-    </p>
-    <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <div class="card p-6 bg-white">
-        <h3 class="font-semibold text-lg">DIY Letters & Resources</h3>
-        <p class="text-sm mt-2">Purchase e-books, templates, and guides directly from PayHip.</p>
-        <a href="https://payhip.com/CAIDConsumerAdvocacyInformationDocuments" target="_blank" class="mt-4 inline-block px-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
-          Visit PayHip Store
-        </a>
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="p-6 border rounded shadow">
+        <h3 class="font-semibold text-lg mb-2">DIY Letters</h3>
+        <p class="mb-4">Generate and download dispute letters using our system.</p>
+        <a href="https://payhip.com/CAIDConsumerAdvocacyInformationDocuments" target="_blank" class="bg-indigo-600 text-white px-4 py-2 rounded">Pay on PayHip</a>
       </div>
-      <div class="card p-6 bg-white">
-        <h3 class="font-semibold text-lg">Full Service</h3>
-        <p class="text-sm mt-2">Book a consultation and let us handle disputes, evidence packets, and mailing.</p>
-        <a href="consultation.html" class="mt-4 inline-block px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
-          Book Consultation
-        </a>
+
+      <div class="p-6 border rounded shadow">
+        <h3 class="font-semibold text-lg mb-2">Full Service</h3>
+        <p class="mb-4">We draft, mail, and handle your disputes, including evidence packets.</p>
+        <a href="consultation.html" class="bg-green-600 text-white px-4 py-2 rounded">Book Consultation</a>
       </div>
     </div>
   </section>
 
-  <!-- Resources / eBooks -->
-  <section id="resources" class="max-w-6xl mx-auto px-4 py-10">
-    <div class="card p-6 bg-white">
-      <h3 class="text-2xl font-bold">Resources & E-Books</h3>
-      <div id="ebooksGrid" class="mt-6 grid md:grid-cols-3 gap-6"></div>
-    </div>
+  <!-- Ebooks -->
+  <section class="py-12 px-6">
+    <h3 class="text-2xl font-semibold text-center mb-6">Resources</h3>
+    <div id="ebooksGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
   </section>
 
-  <footer class="text-center text-xs text-slate-500 py-6">
+  <footer class="bg-slate-100 text-center text-sm text-slate-600 py-4">
     © <span id="year"></span> Consumer Dispute Services
-    · Contact: <a href="mailto:disputeassistant@gmail.com" class="underline">disputeassistant@gmail.com</a>
-    · Phone: 346-342-2447
   </footer>
 
-  <!-- Import Shared Logic -->
+  <!-- Auth Modal -->
+  <dialog id="authDialog" class="rounded-md p-6">
+    <h3 class="text-lg font-bold mb-4">Login / Sign Up</h3>
+    <input id="authEmail" type="email" placeholder="Email" class="border p-2 w-full mb-2">
+    <input id="authPassword" type="password" placeholder="Password" class="border p-2 w-full mb-4">
+    <div class="flex gap-2">
+      <button id="loginBtn" class="bg-indigo-600 text-white px-4 py-2 rounded">Login</button>
+      <button id="signupBtn" class="bg-green-600 text-white px-4 py-2 rounded">Sign Up</button>
+      <button onclick="authDialog.close()" class="px-4 py-2 border rounded">Close</button>
+    </div>
+    <p id="authStatus" class="mt-3 text-sm text-red-500"></p>
+  </dialog>
+
   <script type="module">
-    import { renderEbooks, setupAuthUI } from "./scripts.js";
+    import { renderEbooks, setupAuthUI } from './scripts.js';
+    document.getElementById("year").textContent = new Date().getFullYear();
     renderEbooks("ebooksGrid");
     setupAuthUI();
-    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
