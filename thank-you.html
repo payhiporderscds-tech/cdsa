@@ -1,84 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thank You — CDS</title>
+  <title>CDS – Thank You</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Merriweather&display=swap" rel="stylesheet">
-  <style>
-    body, html { font-family: 'Merriweather', serif; }
-    .logo-text{display:flex;flex-direction:column;line-height:1;}
-    .logo-text .main{font-weight:800;font-size:22px;}
-    .logo-text .sub{font-family:'Alex Brush',cursive;font-size:14px;margin-top:-2px;white-space:nowrap;}
-    .nav-links{display:flex;gap:10px;}
-    .nav-links a{background:var(--brand-1);color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;transition:background .3s;}
-    .nav-links a:hover{background:var(--brand-cta);}
-    .thankyou{padding:80px 20px; max-width:800px; margin:0 auto;}
-    .thankyou h1{text-align:center;font-size:32px;margin-bottom:20px;}
-    .thankyou p{text-align:justify; margin-bottom:20px; line-height:1.6;}
-    .thankyou a.btn{display:inline-block; margin-top:20px; background:var(--brand-cta);padding:12px 22px;font-size:16px; text-decoration:none; color:#fff; border-radius:8px;}
-    .thankyou .btn-container{text-align:center;}
-  </style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="logo" href="index.html">
-        <span class="logo-text">
-          <span class="main">CDS</span>
-          <span class="sub">Consumer Dispute Assistance</span>
-        </span>
-      </a>
-      <div class="nav-links">
-        <a href="#" onclick="document.getElementById('contactModal').style.display='flex'">Contact</a>
+  <!-- Header -->
+  <header class="brand-gradient text-white sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white/20 grid place-items-center font-bold">CDS</div>
+        <div>
+          <h1 class="text-xl font-semibold">Consumer Dispute Services</h1>
+          <p class="text-xs opacity-90">NPI Method</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-4 text-sm">
+        <a href="index.html">Home</a>
+        <a href="intake.html">Client Intake</a>
+        <a href="letters.html">Letters</a>
+        <a href="consultation.html">Consultation</a>
+        <a href="payment.html">Payment</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="loginOpenBtn" class="px-3 py-1.5 rounded-md bg-white text-slate-800 text-sm">Log in</button>
+        <button id="logoutBtn" class="px-3 py-1.5 rounded-md bg-black/30 text-white text-sm hidden">Log out</button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- CONTACT MODAL -->
-  <div id="contactModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.6); align-items:center; justify-content:center; z-index:1000;">
-    <div style="background:#fff; padding:20px; border-radius:12px; text-align:center; max-width:300px;">
-      <h3>Contact Us</h3>
-      <p>Email: <a href="mailto:disputeassistant@gmail.com">disputeassistant@gmail.com</a></p>
-      <p>Phone: <a href="tel:13463422447">(346) 342-2447</a></p>
-      <button onclick="document.getElementById('contactModal').style.display='none'" style="margin-top:10px; padding:8px 16px; border:none; background:var(--brand-1); color:#fff; border-radius:8px; cursor:pointer;">Close</button>
-    </div>
-  </div>
+  <!-- Auth Modal -->
+  <dialog id="authDialog" class="p-0 rounded-xl w-[95%] max-w-md">
+    <form method="dialog" class="card p-6 bg-white">
+      <h3 class="text-xl font-bold">Log in / Create account</h3>
+      <label>Email</label>
+      <input id="authEmail" type="email" class="w-full border rounded-md p-2 mt-1" required />
+      <label>Password</label>
+      <input id="authPassword" type="password" class="w-full border rounded-md p-2 mt-1" required />
+      <div class="mt-4 flex gap-2">
+        <button id="loginBtn" type="button" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Log in</button>
+        <button id="signupBtn" type="button" class="px-4 py-2 bg-slate-800 text-white rounded-md">Create account</button>
+        <button type="submit" class="ml-auto px-4 py-2 border rounded-md">Close</button>
+      </div>
+      <div id="authStatus" class="text-sm mt-2 text-slate-600"></div>
+    </form>
+  </dialog>
 
-  <!-- THANK YOU SECTION -->
-  <section class="thankyou">
-    <h1>✅ Thank You for Your Purchase!</h1>
-    <p><strong>Your dispute package is now being prepared.</strong></p>
-    <p>Please allow the following timeframe for audit and drafting of your letters, depending on the plan you selected:</p>
-
-    <p><strong>DIY Plan:</strong> Drafted letters will be available for download within <strong>1 hour</strong> of submission.</p>
-    <p><strong>Premium Plan:</strong> Letters will be drafted and mailed on your behalf within <strong>3–5 business days</strong>.</p>
-    <p><strong>Full Service Plan:</strong> Comprehensive document preparation, mailing, and <strong>evidence preparation</strong> will begin immediately, with updates provided throughout your <strong>90-day program</strong>.</p>
-
-    <p>📩 You will receive an <strong>email notification</strong> once your dispute letters or package is complete and ready for your review or delivery.</p>
-
-    <p>🔄 When you receive responses from the credit bureaus or furnishers, please return to our portal and <strong>upload them using the “Upload Response” button</strong>, so we can prepare the next round of dispute letters without delay.</p>
-
-    <div class="btn-container">
-      <a href="https://cdsa-chi.vercel.app/#upload" class="btn">Upload Your Response</a>
+  <!-- Thank You Section -->
+  <section class="max-w-3xl mx-auto px-4 py-16 text-center">
+    <h2 class="text-3xl font-bold text-green-600">✅ Thank You!</h2>
+    <p class="mt-4 text-slate-700">
+      Your submission has been received successfully.  
+      A confirmation email has been sent to your inbox.  
+      Our team will review and follow up if needed.
+    </p>
+    <div class="mt-8 flex justify-center gap-4">
+      <a href="index.html" class="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Back to Home</a>
+      <a href="letters.html" class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Generate Another Letter</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="links">
-        <a href="consultation.html">Consultation</a>
-        <a href="payment.html">Plans</a>
-        <a href="terms.html" target="_blank">Terms of Service</a>
-        <a href="mailto:disputeassistant@gmail.com">Email Support</a>
-      </div>
-      <p>© <span id="y"></span> Consumer Dispute Assistance</p>
+  <!-- Resources / eBooks -->
+  <section id="resources" class="max-w-6xl mx-auto px-4 py-10">
+    <div class="card p-6 bg-white">
+      <h3 class="text-2xl font-bold">Resources & E-Books</h3>
+      <div id="ebooksGrid" class="mt-6 grid md:grid-cols-3 gap-6"></div>
     </div>
-    <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  </section>
+
+  <footer class="text-center text-xs text-slate-500 py-6">
+    © <span id="year"></span> Consumer Dispute Services
+    · Contact: <a href="mailto:disputeassistant@gmail.com" class="underline">disputeassistant@gmail.com</a>
+    · Phone: 346-342-2447
   </footer>
+
+  <!-- Import Shared Logic -->
+  <script type="module">
+    import { renderEbooks, setupAuthUI } from "./scripts.js";
+    renderEbooks("ebooksGrid");
+    setupAuthUI();
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
