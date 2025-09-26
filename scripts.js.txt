@@ -1,53 +1,57 @@
-// scripts.js
+// scripts.js  (shared: Firebase Auth + eBooks + Auth UI helpers)
 
-// ===== Firebase Auth Setup =====
+// ===== Firebase (CDS) =====
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { 
-  getAuth, 
-  onAuthStateChanged, 
-  signOut, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword 
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
+// ✅ Corrected Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCIFLzjNsgWusGBOOdVdZlkUWk_j8YdJws",
   authDomain: "cds-dispute-system.firebaseapp.com",
   projectId: "cds-dispute-system",
-  storageBucket: "cds-dispute-system.appspot.com",
+  storageBucket: "cds-dispute-system.appspot.com",   // ✅ fixed here
   messagingSenderId: "1086342153390",
   appId: "1:1086342153390:web:c8f65869313c838280993f",
-  measurementId: "G-WGTD60DXSS"
+  measurementId: "G-WGTD60DXSS",
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-// ===== Ebooks Config =====
+// ===== PayHip eBooks =====
 export const EBOOKS = [
   {
     title: "Consumer Dispute System Blueprint",
-    cover: "https://payhip.com/cdn-cgi/image/format=auto,width=280/https://pe56d.s3.amazonaws.com/o_1j31j8j1tun5hgs1fn13n6nrlr.png",
-    url: "https://payhip.com/b/4OyJS"
+    cover:
+      "https://payhip.com/cdn-cgi/image/format=auto,width=280/https://pe56d.s3.amazonaws.com/o_1j31j8j1tun5hgs1fn13n6nrlr.png",
+    url: "https://payhip.com/b/4OyJS",
   },
   {
     title: "Credit Repair Letters Pack",
-    cover: "https://payhip.com/cdn-cgi/image/format=auto,width=280/https://pe56d.s3.amazonaws.com/o_1j31j9rev1o241vf01bk11fr61mirr.png",
-    url: "https://payhip.com/b/vdB58"
+    cover:
+      "https://payhip.com/cdn-cgi/image/format=auto,width=280/https://pe56d.s3.amazonaws.com/o_1j31j9rev1o241vf01bk11fr61mirr.png",
+    url: "https://payhip.com/b/vdB58",
   },
   {
     title: "NPI Doctrine Explained",
-    cover: "https://payhip.com/cdn-cgi/image/format=auto,width=280/https://pe56d.s3.amazonaws.com/o_1j31jb0i4arq1sp41k5p1bh26lqr.png",
-    url: "https://payhip.com/b/wHflQ"
-  }
+    cover:
+      "https://payhip.com/cdn-cgi/image/format=auto,width=280/https://pe56d.s3.amazonaws.com/o_1j31jb0i4arq1sp41k5p1bh26lqr.png",
+    url: "https://payhip.com/b/wHflQ",
+  },
 ];
 
-// ===== Render Ebooks =====
+// Render eBooks into any page section with that containerId
 export function renderEbooks(containerId) {
   const grid = document.getElementById(containerId);
   if (!grid) return;
   grid.innerHTML = "";
-  EBOOKS.forEach(item => {
+  EBOOKS.forEach((item) => {
     const card = document.createElement("div");
     card.className = "card p-4 bg-slate-50 text-center";
     card.innerHTML = `
@@ -63,44 +67,53 @@ export function renderEbooks(containerId) {
   });
 }
 
-// ===== Auth UI Helpers =====
+// ===== Auth UI wiring =====
 export function setupAuthUI() {
   const $ = (id) => document.getElementById(id);
+  const dialog = $("authDialog");
 
-  const authDialog = $("authDialog");
-  if ($("loginOpenBtn")) $("loginOpenBtn").onclick = () => authDialog.showModal();
-  if ($("authInlineBtn1")) $("authInlineBtn1").onclick = () => authDialog.showModal();
-  if ($("authInlineBtn2")) $("authInlineBtn2").onclick = () => authDialog.showModal();
-  if ($("logoutBtn")) $("logoutBtn").onclick = async () => { await signOut(auth); };
+  if ($("loginOpenBtn")) $("loginOpenBtn").onclick = () => dialog?.showModal();
+  if ($("authInlineBtn1")) $("authInlineBtn1").onclick = () => dialog?.showModal();
+  if ($("authInlineBtn2")) $("authInlineBtn2").onclick = () => dialog?.showModal();
 
-  if ($("loginBtn")) $("loginBtn").onclick = async () => {
-    $("authStatus").textContent = "Logging in...";
-    try {
-      await signInWithEmailAndPassword(auth, $("authEmail").value, $("authPassword").value);
-      $("authStatus").textContent = "Logged in!";
-      setTimeout(() => authDialog.close(), 300);
-    } catch (e) {
-      $("authStatus").textContent = e.message;
-    }
-  };
+  if ($("logoutBtn"))
+    $("logoutBtn").onclick = async () => {
+      await signOut(auth);
+    };
 
-  if ($("signupBtn")) $("signupBtn").onclick = async () => {
-    $("authStatus").textContent = "Creating account...";
-    try {
-      await createUserWithEmailAndPassword(auth, $("authEmail").value, $("authPassword").value);
-      $("authStatus").textContent = "Account created!";
-      setTimeout(() => authDialog.close(), 300);
-    } catch (e) {
-      $("authStatus").textContent = e.message;
-    }
-  };
+  if ($("loginBtn"))
+    $("loginBtn").onclick = async () => {
+      $("authStatus").textContent = "Logging in...";
+      try {
+        await signInWithEmailAndPassword(auth, $("authEmail").value, $("authPassword").value);
+        $("authStatus").textContent = "Logged in!";
+        setTimeout(() => dialog?.close(), 300);
+      } catch (e) {
+        $("authStatus").textContent = e.message;
+      }
+    };
 
+  if ($("signupBtn"))
+    $("signupBtn").onclick = async () => {
+      $("authStatus").textContent = "Creating account...";
+      try {
+        await createUserWithEmailAndPassword(auth, $("authEmail").value, $("authPassword").value);
+        $("authStatus").textContent = "Account created!";
+        setTimeout(() => dialog?.close(), 300);
+      } catch (e) {
+        $("authStatus").textContent = e.message;
+      }
+    };
+
+  // Auth state → toggle UI
   onAuthStateChanged(auth, (user) => {
     const loggedIn = !!user;
     if ($("logoutBtn")) $("logoutBtn").classList.toggle("hidden", !loggedIn);
     if ($("loginOpenBtn")) $("loginOpenBtn").classList.toggle("hidden", loggedIn);
+
     if ($("intakeLocked")) $("intakeLocked").classList.toggle("hidden", loggedIn ? true : false);
     if ($("intakeEmbed")) $("intakeEmbed").classList.toggle("hidden", !loggedIn);
+
     if ($("lettersLocked")) $("lettersLocked").classList.toggle("hidden", loggedIn ? true : false);
     if ($("lettersWrap")) $("lettersWrap").classList.toggle("hidden", !loggedIn);
   });
