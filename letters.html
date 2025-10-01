@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter Generator - Consumer Dispute Services</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Consumer Dispute Services</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="intake.html">Client Intake</a>
+      <a href="letters.html">Letter Generator</a>
+      <a href="consultation.html">Consultation</a>
+      <a href="payment.html">Payment</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Letter Generator</h2>
+    <form onsubmit="event.preventDefault(); generateLetter();">
+      <label>Upload Credit Report (PDF/TXT):</label>
+      <input type="file" id="creditReport" accept=".pdf,.txt">
+      <label>Letter Type:</label>
+      <select id="letterType">
+        <option value="">-- Select Type --</option>
+        <option value="collection">Collection (Round 1)</option>
+        <option value="chargeoff">Charge-Off (Round 1)</option>
+        <option value="cra">CRA (Round 1)</option>
+        <option value="cra2">CRA (Round 2)</option>
+      </select>
+      <label>Your Name:</label><input id="yourName" type="text">
+      <label>Your Address:</label><textarea id="yourAddr"></textarea>
+      <label>Date:</label><input id="letterDate" type="date">
+      <label>Recipient Name:</label><input id="recipName" type="text">
+      <label>Recipient Address:</label><textarea id="recipAddr"></textarea>
+      <label>Account Info:</label><input id="acctInfo" type="text">
+      <label>Notes:</label><textarea id="notes"></textarea>
+      <button type="submit" class="button">Generate Letter</button>
+    </form>
+    <textarea id="output" rows="12" placeholder="Your generated letter will appear here..."></textarea>
+    <div class="actions">
+      <button id="docBtn" class="button" onclick="downloadDoc()" disabled>Download DOC</button>
+      <button id="pdfBtn" class="button" onclick="downloadPDF()" disabled>Download PDF</button>
+      <button class="button" onclick="copyLetter()">Copy to Clipboard</button>
+      <button class="button" onclick="autoDetectRound2()">Detect Round 2</button>
+    </div>
+    <section>
+      <h2>Featured eBooks</h2>
+      <div id="ebooksGrid" class="ebook-grid"></div>
+    </section>
+  </main>
+  <footer>
+    <p>© <span id="year"></span> Consumer Dispute Services</p>
+  </footer>
+  <script src="scripts.js"></script>
+  <script src="letter-logic.js"></script>
+</body>
+</html>
